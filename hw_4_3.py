@@ -16,5 +16,5 @@ SELECT iris_name,
                  MAX (i.attr4)     atr4_max,
                  MIN (i.attr4)     atr4_min,
                  i.iris_name
-            FROM kkuznetsov.iris i
-        GROUP BY iris_name)
+            FROM kuznetsov.iris_data i
+        GROUP BY iris_name ) sub_iris;
