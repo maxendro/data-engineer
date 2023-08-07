@@ -1,4 +1,4 @@
-# Get and insert test data for HomeWork #7
+# Генерация данных для Лабораторной работы №7
 
 import csv
 import pandas as pd
@@ -13,6 +13,7 @@ db_name = "postgres"
 # port default = 5432
 port = 5432
 
+# количество уникальных пользователей (в задании 10)
 users_cnt = 10
 
 try:
@@ -27,13 +28,18 @@ try:
     # Включим для нашей задачи авто-коммит по умолчанию
     conn.autocommit = True
 
+    # выполняем столько раз сколько пользователей
     for x in range(1, users_cnt+1):
+        # берем файл с 10тыс разных имён сайтов
         df = pd.read_fwf('opendns-random-domains.txt', names=['site'], header=None)
+        #  добавляем колонку user_id
         df.insert(0, 'user_id', x, True)
+         #  добавляем колонку bytes с рандомными значениями
         df['bytes'] = np.random.randint(1024, 40960000, df.shape[0])
+        # Случайный выбор части общего количества строк
         df.sample(frac=0.50, replace=True)
         for i, row in df.iterrows():
-            # Вытаскиваем данные из строки списка
+            # Вытаскиваем данные из строки
             user_id = row[0]
             site = row[1]
             bytes = row[2]
