@@ -41,3 +41,8 @@ WITH (
 	compresslevel=5
 )
 DISTRIBUTED BY (user_id);                                    
+
+select web_site, count(web_site) cnt_total, sum(bytes) byte_total, count(distinct user_id) uniq_usr 
+FROM public.user_log_kuznetsov 
+group by web_site
+order by 2 desc limit 20;
