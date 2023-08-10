@@ -13,6 +13,7 @@ db_name = "postgres"
 # port default = 5432
 port = 5432
 
+#Для скольки пользователей сгенерить данные
 users_cnt = 10
 
 try:
