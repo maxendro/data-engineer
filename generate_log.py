@@ -16,7 +16,7 @@ port = 5432
 users_cnt = 10
 
 try:
-    # открываем соединение с PostgreSQL
+    # открываем соединение с GreenPlum(PostgreSQL)
     conn = psycopg2.connect(
         host=host,
         port=port,
@@ -46,4 +46,4 @@ finally:
     # Закрываем соединение с БД
     if conn:
         conn.close()
-        print("\n[INFO] Соединение с PostgreSQL закрыто.")
+        print("\n[INFO] Соединение с GreenPlum закрыто.")
