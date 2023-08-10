@@ -8,7 +8,7 @@ import psycopg2
 # Параметры для подключения к PostgreSQL
 host = "192.168.77.21"
 user = "kuznetsov"
-password = "w7ton"
+password = "******"
 db_name = "postgres"
 # port default = 5432
 port = 5432
