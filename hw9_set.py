@@ -4,19 +4,16 @@
 from kafka import KafkaProducer
 # библиотека для генерации "фальшивых" данных
 from faker import Faker
-from datetime import datetime
 import random
-from random import randint
 import json
 
 # количество строк данных
 n = 1000
-
 try:
     producer = KafkaProducer(bootstrap_servers='vm-strmng-s-1.test.local:9092')
     # Выставляем локаль для faker
     fake = Faker('ru_RU')
-    #выставление весов параметра priority в для использования в random.choice
+    #выставление весов параметра priority для использования в random.choice
     priority_list = ['0'] * int(n*0.75) + ['1'] * int(n*0.2) + ['2'] * int(n*0.05)
     for _ in range(n):
         message = {'client': fake.name(),
