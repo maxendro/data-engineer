@@ -15,12 +15,12 @@ try:
     fake = Faker('ru_RU')
     #выставление весов параметра priority для использования в random.choice
     priority_list = ['0'] * int(n*0.75) + ['1'] * int(n*0.2) + ['2'] * int(n*0.05)
-    for _ in range(n):
+    for i in range(n):
         message = {'client': fake.name(),
                    'opened': fake.date_time_this_year().strftime("%d-%m-%Y %H:%M"),
                    'priority': int(random.choice(priority_list))
                    }
-        # сериализируем объект dict в строку str формата JSON. 
+        # сериализируем объект dict в строку str формата JSON.
         message_json = json.dumps(message).encode('utf-8')
         # отправляем сообщение в очередь kafka
         producer.send('lab10.kuznetsov', value=message_json)
@@ -28,4 +28,5 @@ try:
 except Exception as _ex:
       print("[ERR] Ошибка : ", _ex)
 finally:
+      print("[INFO] В очередь ушло {} записей:".format(i+1))
       producer.close()
