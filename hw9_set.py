@@ -12,7 +12,7 @@ n = 1000
 try:
     producer = KafkaProducer(bootstrap_servers='vm-strmng-s-1.test.local:9092')
     # Выставляем локаль для faker
-    fake = Faker('en_US')
+    fake = Faker('ru_RU')
     #выставление весов параметра priority для использования в random.choice
     priority_list = ['0'] * int(n*0.75) + ['1'] * int(n*0.2) + ['2'] * int(n*0.05)
     for i in range(n):
