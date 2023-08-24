@@ -8,7 +8,7 @@ import json
 
 dbname = 'postgres'
 user = 'kuznetsov'
-password = 'w7ton'
+password = '*****'
 host = '192.168.77.21'
 port = 5432
 
