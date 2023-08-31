@@ -1,5 +1,5 @@
 import aspose.pdf as ap
-import fitz
+import fitz # для корректной работы fitz нужно еще поставить pip install pymupdf
 import os
 
 # Имя pdf - файла для замены
