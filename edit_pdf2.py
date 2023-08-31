@@ -30,15 +30,15 @@ textFragmentCollection = txtAbsorber.text_fragments
 for txtFragment in textFragmentCollection:
     txtFragment.text = repl_to
 
-# Сохраните обновленный PDF
+# Сохраняем во временный PDF
 document.save(pdf_temp)
 
 doc = fitz.open(pdf_temp)
 for page in doc:
-    # Ристуем белый прямоугольник на watermark
+    # Рисуем белый прямоугольник на watermark
     page.draw_rect([1,1,300,20],   color=None, fill=fitz.utils.getColor('white'), overlay=True, fill_opacity=1)
 # Save pdf
 doc.save(pdf_out)
 doc.close()
-# удаляем временный
+# удаляем временный файл
 os.remove(pdf_temp)
