@@ -1,4 +1,4 @@
-import aspose.pdf as ap  # платная, поэтому ставить watermark. Хорошо что на самом верху.
+import aspose.pdf as ap  # платная, поэтому ставит watermark. Хорошо что на самом верху.
 import fitz # для корректной работы fitz нужно еще поставить pip install pymupdf
 import os
 
@@ -37,7 +37,7 @@ doc = fitz.open(pdf_temp)
 for page in doc:
     # Рисуем белый прямоугольник на watermark
     page.draw_rect([1,1,300,20],   color=None, fill=fitz.utils.getColor('white'), overlay=True, fill_opacity=1)
-# Save pdf
+# Save итоговый pdf
 doc.save(pdf_out)
 doc.close()
 # удаляем временный файл
