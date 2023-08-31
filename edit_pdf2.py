@@ -35,7 +35,7 @@ document.save(pdf_temp)
 
 doc = fitz.open(pdf_temp)
 for page in doc:
-    # For every page, draw a rectangle on coordinates (1,1)(100,100)
+    # Ристуем белый прямоугольник на watermark
     page.draw_rect([1,1,300,20],   color=None, fill=fitz.utils.getColor('white'), overlay=True, fill_opacity=1)
 # Save pdf
 doc.save(pdf_out)
