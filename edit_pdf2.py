@@ -1,4 +1,4 @@
-import aspose.pdf as ap
+import aspose.pdf as ap  # платная, поэтому ставить watermark. Хорошо что на самом верху.
 import fitz # для корректной работы fitz нужно еще поставить pip install pymupdf
 import os
 
