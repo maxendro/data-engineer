@@ -28,7 +28,7 @@ def send_mess(**kwargs):
 
 # конструктор DAG
 with DAG(DAG_NAME, description='kuznetsov_DAG',
-         schedule_interval='/2 * * * *', #расписание, формат CRON
+         schedule_interval='*/2 * * * *', #расписание, формат CRON
          catchup=False, # если упал DAG, догонять очередь не надо
          max_active_runs=1, # не запускать пока висит не завершенный
          default_args=args,
