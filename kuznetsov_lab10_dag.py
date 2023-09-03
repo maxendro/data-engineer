@@ -11,7 +11,7 @@ import requests
 
 # Название DAG-файла
 DAG_NAME = 'kuznetsov_dag'
-# Коннект, созданный web-интерфейсе в Airflow
+# Коннект, созданный в web-интерфейсе в Airflow
 GP_CONN_ID = 'kuznetsov_conn'
 
 MESS = ' Live long and prosper!' # Живите долго и процветайте!
