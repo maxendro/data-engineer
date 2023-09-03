@@ -1,15 +1,14 @@
 # Лабораторная работа №10.
 # Инструмент Apache Airflow и создание DAG файлов
 
-from datetime import datetime
-from datetime import timedelta
+import requests
 from airflow import DAG
 from airflow import configuration
-from airflow.operators import PostgresOperator
-from airflow.operators import PythonOperator
-import requests
+from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime, timedelta
 
-DAG_NAME = 'kuznetsov_dag'  #
+DAG_NAME = 'kuznetsov_dag'  
 GP_CONN_ID = 'kuznetsov_conn'
 
 MESS = ' Живите долго и процветайте!'
