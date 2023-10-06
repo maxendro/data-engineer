@@ -6,8 +6,6 @@ from pyspark.sql import SparkSession
 from pyspark import SparkContext
 from pyspark.sql.types import *
 import json
-import time
-import pandas as pd
 
 try:
     consumer = KafkaConsumer('final.kuznetsov', bootstrap_servers='vm-strmng-s-1.test.local:9092',
@@ -30,8 +28,8 @@ try:
                     StructField('content_id', IntegerType(), False),
                     StructField('start_s', StringType(), False),
                     StructField('stop_s', StringType(), False),
-                    StructField('channel', StringType(), False),
-                    StructField('region_id', IntegerType(), False)
+                    StructField('channel_id', IntegerType(), False),
+                    StructField('region_id', IntegerType(), False)    
                 ])
                 struct = StructType(fields=dataschema)
                 rdd = sc.parallelize(rows)
