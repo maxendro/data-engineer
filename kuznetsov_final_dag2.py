@@ -29,9 +29,8 @@ with DAG(DAG_NAME, description='kuznetsov_DAG2',
          max_active_runs=1, # не запускать пока висит не завершенный
          default_args=args,
          params={'labels': {'env': 'prod', 'priority': 'high'}}) as dag:
-    #PythonOperator (выполнение функции Python)  - отправляем сообщение в Telegramm
 
-    # PostgresOperator (выполнени DML в PG)  - вставляем запись в таблицу
+    # PostgresOperator (выполнени DML в PG) 
     drop_t = PostgresOperator(task_id="drop_t",
                                 sql=sql_drop_t,
                                 postgres_conn_id=GP_CONN_ID,
