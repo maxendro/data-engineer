@@ -1,7 +1,7 @@
 # Аттестационная работа. Вариант №1
+# Модуль для DAG-файла AirFlow обновления MV
 
 import datetime
-import requests
 from airflow import DAG
 from airflow import configuration
 from airflow.operators.postgres_operator import PostgresOperator
