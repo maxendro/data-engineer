@@ -1,5 +1,6 @@
 # Аттестационная работа. Вариант №1
 # "Создание системы аналитики для обработки и визуализации данных использования услуги интерактивного телевидения Ростелеком".
+# Модуль генерации потока использования ТВ и отправка в MQTT (Kafka)
 
 from kafka import KafkaProducer
 # библиотека для генерации "фальшивых" данных
@@ -33,14 +34,15 @@ try:
     producer = KafkaProducer(bootstrap_servers='vm-strmng-s-1.test.local:9092')
 
     fake = Faker('ru_RU')
+    # для теста - не по всему контенту (100 единиц) и не по всем регионам
     df_content = pd.read_sql( """select * from public.final_kuznetsov_content where content_id<=30 order by content_id""", conn)
     df_regions = pd.read_sql("""select * from public.final_kuznetsov_regions where region_id<=10 order by region_id""",     conn)
 
-    for row_r in df_regions.iterrows():
-        for row_c in df_content.iterrows():
-            for i in range(int(row_r[1][2] * (row_c[1][5]) / 5000)):
-                start_s = str(fake.date_time_this_year().strftime("%d-%m-%Y"))
-                # if stop session next day
+    for row_r in df_regions.iterrows(): # по регионам
+        for row_c in df_content.iterrows(): # по контенту
+            for i in range(int(row_r[1][2] * (row_c[1][5]) / 5000)):  # уменьшим модель количества жителей 
+                start_s = str(fake.date_time_this_year().strftime("%d-%m-%Y"))  # дата рандомно за 23 год
+                # если просомтр заканчивается на следующие сутки
                 if row_c[1][3].strftime("%H:%M:%S") < row_c[1][2].strftime("%H:%M:%S"):
                     stop_s = datetime.strptime(start_s + " " + row_c[1][3].strftime("%H:%M:%S"),
                                                "%d-%m-%Y %H:%M:%S") + timedelta(days=1)
@@ -49,8 +51,10 @@ try:
 
                 message = {'user_id': fake.pyint((row_r[1][0] - 1) * 10000 + 1, row_r[1][0] * 10000),
                            'content_id': row_c[1][0],
+                           # упрощаем  - начало сессии совпадает с началом программы
                            'start_s': datetime.strptime(start_s + " " + row_c[1][2].strftime("%H:%M:%S"),
                                                         "%d-%m-%Y %H:%M:%S"),
+                           # формируем время сессии
                            'stop_s': datetime.strptime(random_date(start_s + " " + row_c[1][2].strftime("%H:%M:%S"),
                                                                    stop_s.strftime("%d-%m-%Y %H:%M:%S"),
                                                                    random.random()), "%d-%m-%Y %H:%M:%S"),
