@@ -1,3 +1,6 @@
+# Аттестационная работа. Вариант №1
+# Модуль для DAG-файла AirFlow создания / заполнения/ удаления данных тёплого и горячего слоя данных  
+
 from datetime import datetime
 from datetime import timedelta
 from airflow import DAG
@@ -10,6 +13,10 @@ DAG_NAME = 'final_kuznetsov_dag2'
 # Коннект, созданный в web-интерфейсе в Airflow
 GP_CONN_ID = 'kuznetsov_conn'
 
+# Легенда:
+# final_kuznetsov_ext - внешняя таблица PFX
+# final_kuznetsov_warm - локальный срез в GreenPlum
+# v_final_kuznetsov_hot - вьюха с горячими данными
 sql_drop_t = f"drop table if exists final_kuznetsov_warm cascade;"
 sql_create_t = f"CREATE TABLE final_kuznetsov_warm (user_id  int4,content_id int4,start_s timestamp,stop_s timestamp, channel_id int, region_id int) WITH (	appendonly=true, orientation=column,	compresstype=zstd,	compresslevel=1)DISTRIBUTED RANDOMLY;"
 sql_insert_t = f"insert into final_kuznetsov_warm select * from final_kuznetsov_ext e where e.start_s > date_trunc('day'::text, now() - '6 mons'::interval)";
