@@ -1,5 +1,6 @@
 # Аттестационная работа. Вариант №1
-# Создание consumer, который будет вычитывать данные из очереди сообщений put in parquet-file on HDFS
+# Модуль создания consumer, который будет вычитывать данные из очереди сообщений и класть их в parquet-file на HDFS
+
 
 from kafka import KafkaConsumer
 from pyspark.sql import SparkSession
